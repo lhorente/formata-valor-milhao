@@ -8,10 +8,7 @@
 				$valor_formatado .= " bi";
 			} else if (substr($valor,-6) == '000000'){
 				$decimal = substr($valor,-9,3);
-				$pos_zero = strpos($decimal,'0');
-				if ($pos_zero !== false){
-					$decimal = substr($decimal,0,$pos_zero);
-				}			
+				$decimal = rtrim($decimal,"0"); // Remove zeros a direita		
 				$valor_formatado = "{$before_colon},{$decimal}";
 				$valor_formatado .= " bi";
 			} else {
@@ -25,10 +22,7 @@
 				$valor_formatado .= " mi";
 			} else if (substr($valor,-3) == '000'){
 				$decimal = substr($valor,-6,3);
-				$pos_zero = strpos($decimal,'0');
-				if ($pos_zero !== false){
-					$decimal = substr($decimal,0,$pos_zero);
-				}
+				$decimal = rtrim($decimal,"0"); // Remove zeros a direita
 				$valor_formatado = "{$before_colon},{$decimal}";
 				$valor_formatado .= " mi";
 			} else {
@@ -42,8 +36,11 @@
 		return $valor_formatado;
 	}
 	
-	$valores = array(1000,1000000,1500000,1250000,1250000000,1000000000);
+	$valores = array(1000000,1100000,1110000,1111000,1010000,1001000,1101000,1000000000,1100000000,1110000000,1111000000,1010000000,1001000000,1101000000);
 	foreach ($valores as $valor){
-		echo $valor . ": " . formataValor($valor) . "</br>";
+		echo '// ' . number_format($valor,0,",",".") . ':<br>';
+		echo 'echo formataValor('.$valor.');<br>';
+		echo '// ' . formataValor($valor) . '<br>';
+		echo '<br>';
 	}
 ?>
